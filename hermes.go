@@ -44,7 +44,7 @@ const TDRightToLeft TextDirection = "rtl"
 type Product struct {
 	Name        string
 	Link        string // e.g. https://matcornic.github.io
-	Logo        string // e.g. https://matcornic.github.io/img/logo.png
+	Logo        string // e.g. https://i.imgur.com/2Thym2C.png
 	Copyright   string // Copyright © 2019 Hermes. All rights reserved.
 	TroubleText string // TroubleText is the sentence at the end of the email for users having trouble with the button (default to `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`)
 }
@@ -125,8 +125,8 @@ func setDefaultEmailValues(e *Email) error {
 			Intros:     []string{},
 			Dictionary: []Entry{},
 			Outros:     []string{},
-			Signature:  "Yours truly",
-			Greeting:   "Hi",
+			Signature:  "Regards",
+			Greeting:   "Hello",
 		},
 	}
 	// Merge the given email with default one
@@ -141,8 +141,9 @@ func setDefaultHermesValues(h *Hermes) error {
 		Theme:         new(Default),
 		TextDirection: defaultTextDirection,
 		Product: Product{
-			Name:        "Hermes",
-			Copyright:   "Copyright © 2019 Hermes. All rights reserved.",
+			Name:        "SIT-Competence",
+			Logo:        "https://i.imgur.com/2Thym2C.png",
+			Copyright:   "SIT-Competence CS@SIT Project 2019.",
 			TroubleText: "If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.",
 		},
 	}

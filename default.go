@@ -40,7 +40,6 @@ func (dt *Default) HTMLTemplate() string {
       width: 100%;
       margin: 0;
       padding: 0;
-      background-color: #F2F4F6;
     }
     .email-content {
       width: 100%;
@@ -164,7 +163,7 @@ func (dt *Default) HTMLTemplate() string {
     }
     cite {
       display: block;
-      font-size: 0.925rem; 
+      font-size: 0.925rem;
     }
     cite:before {
       content: "\2014 \0020";
@@ -201,7 +200,7 @@ func (dt *Default) HTMLTemplate() string {
       line-height: 18px;
     }
     .content {
-      align: center;
+      text-align: center;
       padding: 0;
     }
     /* Data table ------------------------------ */
@@ -237,13 +236,12 @@ func (dt *Default) HTMLTemplate() string {
       width: 200px;
       background-color: #3869D4;
       border-radius: 3px;
-      color: #ffffff !important;
+      color: #FFF !important;
       font-size: 15px;
       line-height: 45px;
       text-align: center;
       text-decoration: none;
       -webkit-text-size-adjust: none;
-      mso-hide: all;
     }
     /*Media Queries ------------------------------ */
     @media only screen and (max-width: 600px) {
@@ -276,7 +274,6 @@ func (dt *Default) HTMLTemplate() string {
                 </a>
             </td>
           </tr>
-
           <!-- Email Body -->
           <tr>
             <td class="email-body" width="100%">
@@ -284,19 +281,24 @@ func (dt *Default) HTMLTemplate() string {
                 <!-- Body content -->
                 <tr>
                   <td class="content-cell">
-                    <h1>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}</h1>
+                    <h1>
+                      {{if .Email.Body.Title }}
+                        {{ .Email.Body.Title }}
+                      {{ else }}
+                        {{ .Email.Body.Greeting }} {{ .Email.Body.Name }},
+                      {{ end }}
+                    </h1>
                     {{ with .Email.Body.Intros }}
-                        {{ if gt (len .) 0 }}
-                          {{ range $line := . }}
-                            <p>{{ $line }}</p>
-                          {{ end }}
+                      {{ if gt (len .) 0 }}
+                        {{ range $line := . }}
+                          <p>{{ $line }}</p>
                         {{ end }}
+                      {{ end }}
                     {{ end }}
                     {{ if (ne .Email.Body.FreeMarkdown "") }}
                       {{ .Email.Body.FreeMarkdown.ToHTML }}
                     {{ else }}
-
-                      {{ with .Email.Body.Dictionary }} 
+                      {{ with .Email.Body.Dictionary }}
                         {{ if gt (len .) 0 }}
                           <dl class="body-dictionary">
                             {{ range $entry := . }}
@@ -306,7 +308,6 @@ func (dt *Default) HTMLTemplate() string {
                           </dl>
                         {{ end }}
                       {{ end }}
-
                       <!-- Table -->
                       {{ with .Email.Body.Table }}
                         {{ $data := .Data }}
@@ -357,7 +358,6 @@ func (dt *Default) HTMLTemplate() string {
                           </table>
                         {{ end }}
                       {{ end }}
-
                       <!-- Action -->
                       {{ with .Email.Body.Actions }}
                         {{ if gt (len .) 0 }}
@@ -377,24 +377,21 @@ func (dt *Default) HTMLTemplate() string {
                           {{ end }}
                         {{ end }}
                       {{ end }}
-
                     {{ end }}
-                    {{ with .Email.Body.Outros }} 
+                    {{ with .Email.Body.Outros }}
                         {{ if gt (len .) 0 }}
                           {{ range $line := . }}
                             <p>{{ $line }}</p>
                           {{ end }}
                         {{ end }}
                       {{ end }}
-
                     <p>
                       {{.Email.Body.Signature}},
                       <br />
                       {{.Hermes.Product.Name}}
                     </p>
-
                     {{ if (eq .Email.Body.FreeMarkdown "") }}
-                      {{ with .Email.Body.Actions }} 
+                      {{ with .Email.Body.Actions }}
                         <table class="body-sub">
                           <tbody>
                               {{ range $action := . }}
@@ -477,19 +474,18 @@ func (dt *Default) PlainTextTemplate() string {
       </table>
     {{ end }}
   {{ end }}
-  {{ with .Email.Body.Actions }} 
+  {{ with .Email.Body.Actions }}
     {{ range $action := . }}
-      <p>{{ $action.Instructions }} {{ $action.Button.Link }}</p> 
+      <p>{{ $action.Instructions }} {{ $action.Button.Link }}</p>
     {{ end }}
   {{ end }}
 {{ end }}
-{{ with .Email.Body.Outros }} 
+{{ with .Email.Body.Outros }}
   {{ range $line := . }}
     <p>{{ $line }}<p>
   {{ end }}
 {{ end }}
 <p>{{.Email.Body.Signature}},<br>{{.Hermes.Product.Name}} - {{.Hermes.Product.Link}}</p>
-
 <p>{{.Hermes.Product.Copyright}}</p>
 `
 }
